@@ -1,17 +1,14 @@
 def find_item_by_name_in_collection(name, collection)
-  # Implement me first!
-  #
-  # Consult README for inputs and outputs
-
+  # Iterate through collection with find enumerable to match first :item == name
+  collection.find {|item_hash| item_hash[:item] == name}
 end
 
 def consolidate_cart(cart)
-  # Consult README for inputs and outputs
-  #
-  # REMEMBER: This returns a new Array that represents the cart. Don't merely
-  # change `cart` (i.e. mutate) it. It's easier to return a new thing.
-
+  # Create a cart of only unique items and then start to remape it to add item count
+  cart.uniq.map do |uniq_item_hash|
+    # using new unique items count the number of times in cart
+    item_count = cart.count {|cart_item_hash| cart_item_hash == uniq_item_hash}
+    # Via map merge the existing uniq_item_hash with a new count hash
+    uniq_item_hash.merge!({:count => item_count})
+  end
 end
-
-
-  
